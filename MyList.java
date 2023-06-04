@@ -18,6 +18,8 @@ public class MyList<E> implements Cloneable {
 	/**
 	 * Reference on the first Entry of this List
 	 */
+
+	//modCount Anzahl der Modifikationen (Änderungen) an der Liste zu verfolgen.
 	private int modCount;
 	private MyEntry<E> begin;
 	/**
@@ -30,31 +32,31 @@ public class MyList<E> implements Cloneable {
 	 */
 public MyList() {
 		pos = begin = new MyEntry<E>();
+		// modCount als 0 deklariert und mit 0 initialisiert. Sie wird verwendet, um zu zählen, wie oft Änderungen an der Liste vorgenommen werden.
 		modCount = 0;
 }
-		/**
- 35 * Returns the current modification count of this list. It may be
- increased by
- 36 * {@link #increaseModCount()}
- 37 *
- 38 * @return the current modification count
- 39 */
+		// gibt den aktuellen Wert der Variable modCount zurück
 		public int getModCount() {
 		return this.modCount;
 		}
-
-		/**
- 45 * Increases the current modification count of this list.
- 46 */
+		//erhöht den Wert von modCount um 1 quasi geht +1 weiter
+		// WENN MAX_VALUE IN UNSEREM INTEGER LISTE != Count Dann ++ WENN NICHT DANN NULL
 		public void increaseModCount() {
-		if(this.modCount == Integer.MAX_VALUE) {
-			this.modCount = 0;
-			}
-		else {
-			this.modCount++;
-			}
+			// überprüft sie, ob der aktuelle Wert von modCount bereits den maximalen Wert von Integer.MAX_VALUE erreicht hat.
+			if (this.modCount != Integer.MAX_VALUE) {
+				// Falls ja, wird modCount auf 0 zurückgesetzt, um einen Überlauf zu vermeiden.
+				this.modCount++;
+				}
+			// Andernfalls wird der Wert von modCount um 1 erhöht.
+			else {
+				this.modCount = 0;
+				}
 		}
-
+		/*
+		Durch die Verwendung von modCount können beispielsweise Iteratoren oder andere Teile des Codes feststellen,
+		ob die Liste seit dem letzten Zugriff modifiziert wurde. Dies kann hilfreich sein,
+		um Konsistenz und Synchronisierung sicherzustellen oder um zu überprüfen, ob es notwendig ist, bestimmte Operationen erneut auszuführen.
+		 */
 	/**
 	 * Determines if this List is empty or not.
 	 * 
@@ -183,52 +185,40 @@ public MyList() {
 		return true;
 	}
 
+	// Override zu Interfaces, damit wird geprüft, ob die Methode der Klasse tatsächlich eine Methode der übergeordneten Klasse überschreibt
 	public Iterator<E> iterator() {
 		return new ListIterator() {
 			@Override
 			public boolean hasNext() {
 				return false;
 			}
-
 			@Override
 			public Object next() {
 				return null;
 			}
-
 			@Override
 			public boolean hasPrevious() {
 				return false;
 			}
-
 			@Override
 			public Object previous() {
 				return null;
 			}
-
 			@Override
 			public int nextIndex() {
 				return 0;
 			}
-
 			@Override
 			public int previousIndex() {
 				return 0;
 			}
-
 			@Override
-			public void remove() {
-
-			}
-
+			public void remove() {}
 			@Override
-			public void set(Object o) {
-
-			}
-
+			public void set(Object o) {}
 			@Override
-			public void add(Object o) {
-
-			}
+			public void add(Object o) {}
 		};
 		}
+
 }

@@ -26,6 +26,6 @@ public interface Visitor<E> {
     *         element in a {@link Visitable} has been visited once, else
     *         <code>false</code>
     */
-   public boolean visit(E o);
+   public boolean visit(E o); // impl
 
 }

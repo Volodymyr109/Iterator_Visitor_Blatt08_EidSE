@@ -30,6 +30,6 @@ public interface Visitable<E> {
     *           the Visitor which should be called for every element in this
     *           Visitable instance
     */
-   public void accept(Visitor<E> v);
+   public void accept(Visitor<E> v); // impl
 
 }
